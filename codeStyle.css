@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #2e2e2e;
+    color: white;
+}
+
+main {
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+textarea {
+    background-color: #e2e6ea;
+}

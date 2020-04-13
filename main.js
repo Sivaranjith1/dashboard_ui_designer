@@ -1,10 +1,12 @@
 const electron = require('electron')
 const url = require('url')
 const path = require('path')
+const {decryptCode} = require('./backend/code_import')
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 let mainWindow;
+let codeWindow;
 
 app.on('ready', () => {
     //will run when the app is ready
@@ -30,9 +32,41 @@ app.on('ready', () => {
 
 
 //-----------------------------
+//     Code import window
+//-----------------------------
+function createCodeWindow(){
+    codeWindow = new BrowserWindow({
+        width: 750,
+        height: 600,
+        title: 'Import from code',
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+
+    codeWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'codeImport.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
+
+    //garbage collection
+    codeWindow.on('close', () => {
+        codeWindow = null
+    })
+}
+
+//Catch code:import
+ipcMain.on('code:import', (e, item) => {
+    decryptCode(item)
+    codeWindow.close()
+})
+
+
+
+//-----------------------------
 //          Menu
 //-----------------------------
-
 const mainMenuTemplate = [
     {
     label: 'File',
@@ -44,8 +78,20 @@ const mainMenuTemplate = [
                 app.quit()
             }
         },
-    ]
-}]
+        ]
+    },
+    {
+        label: 'Code',
+        submenu: [
+            {
+                label: 'Import from Code',
+                click(){
+                    createCodeWindow()
+                }
+            }
+        ]
+    }
+]
 
 //if mac add empty object
 if(process.platform == 'darwin'){
