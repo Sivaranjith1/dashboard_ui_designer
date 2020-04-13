@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-ui-designer",
+  "version": "1.0.0",
+  "description": "A desktop application for creating code for dashboard ui",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Sivaranjith Sivarasa",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.2.1",
+    "konva": "^4.2.2"
+  }
+}
