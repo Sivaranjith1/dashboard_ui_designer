@@ -58,7 +58,8 @@ function createCodeWindow(){
 
 //Catch code:import
 ipcMain.on('code:import', (e, item) => {
-    decryptCode(item)
+    decrypted = decryptCode(item)
+    
     codeWindow.close()
 })
 
