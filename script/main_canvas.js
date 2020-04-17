@@ -1,4 +1,8 @@
-let Konva = require( 'konva')
+const Konva = require( 'konva')
+const electron = require('electron')
+
+const { ipcRenderer } = electron;
+
 
 let stage
 init()
@@ -9,23 +13,26 @@ let group = new Konva.Group({
     draggable: true
 })
 
-let background = new Konva.Rect({
-    x: 20,
-    y: 20,
-    width: 480,
-    height: 272,
-    fill: '#1c1c1c',
-    strokeWidth: 2
-})
-group.add(background)
+draw_background()
 
-
+//-------------------------
+//      Drags
+//-------------------------
 function groupDrag(e){
-    if (!e.evt.shiftKey){
-        group.stopDrag()
+    if(e.target == group) {
+        console.log('group')
+        if (!e.evt.shiftKey){
+            group.stopDrag()
+        }
     }
 }
 group.on('dragstart', groupDrag)
+
+function elemDrag(e){
+    if (e.evt.shiftKey){
+        e.target.stopDrag()
+    }
+}
 
 
 backgroundLayer.add(group)
@@ -38,13 +45,31 @@ function init(){
     let topDiv = document.querySelector('.top')
     var width = topDiv.offsetWidth 
     var height = topDiv.offsetHeight
-
+    
     stage = new Konva.Stage({
         container: 'container',
         width: width,
         height: height
     }) 
 }
+
+function draw_background(){
+    let background = new Konva.Rect({
+        x: 20,
+        y: 20,
+        width: 480,
+        height: 272,
+        fill: '#1c1c1c',
+        strokeWidth: 2
+    })
+    group.add(background)
+}
+
+
+//-------------------------
+//      On code import
+//-------------------------
+ipcRenderer.on('code:import', code_import)
 //-------------------------
 //      resize
 //-------------------------

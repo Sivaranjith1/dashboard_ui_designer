@@ -46,8 +46,6 @@ function decryptCode(code){
     //draw_button_flat
     flat = findRegex(code, 'draw_button_flat')
     flat = decryptButtonFlat(flat)
-    
-    console.log(flat)
 
 
     return [
@@ -72,7 +70,7 @@ function findRegex(code, regex){
     return lines.map(elem => 
         elem[1]
         .replace(regex, '')
-        .substring(1)
+        // .substring(1)
         .slice(0, -1)
         .split(',')
         .map(sub =>
@@ -89,6 +87,7 @@ function decryptLine(arr){
         if(elem.length === 7){
             try {
                 output.push({
+                    type: 'line',
                     x1: eval(elem[0]),
                     y1: eval(elem[1]),
                     x2: eval(elem[2]),
@@ -110,6 +109,7 @@ function decryptRect(arr){
     arr.forEach(elem => {
         if(elem.length === 7){
             try {
+                console.log(elem)
                 output.push({
                     type: 'rect',
                     x: eval(elem[0]),
