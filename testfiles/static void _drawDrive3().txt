@@ -17,12 +17,12 @@ static void _drawDrive3()
 	draw_text(90,28,28,OPT_CENTERX,"V MIN", TEXT_GREY, MAX_ALPHA);
 	if(min_voltage > 3.7) //all good
 	{
-		draw_rectangle(25,65,150 - 25 ,165 - 65,voltage_color,MAX_ALPHA, RECT_WIDTH);
+		draw_rectangle(25,65,150 - 25 ,165 - 65,FINE_GREEN,MAX_ALPHA, RECT_WIDTH);
 		draw_number(108, 90, 31, OPT_RIGHTX, (uint32_t)(min_voltage*10), WHITE, MAX_ALPHA);
 		draw_text(84, 90, 31, OPT_CENTERX, ".", WHITE, MAX_ALPHA);
 	} else 
 	{
-		draw_rectangleWithFill(25,65,150,165,voltage_color,MAX_ALPHA);
+		draw_rectangleWithFill(25,65,150,165,RED,MAX_ALPHA);
 		draw_number(108, 90, 31, OPT_RIGHTX, (uint32_t)(min_voltage*10), BLACK, MAX_ALPHA);
 		draw_text(84, 90, 31, OPT_CENTERX, ".", BLACK, MAX_ALPHA);
 	}
@@ -68,7 +68,6 @@ static void _drawDrive3()
             inverter_data[RL].status.state.state.ready_to_drive &&
             inverter_data[RR].status.state.state.ready_to_drive)
     {
-        //draw_button(inv_state_x, inv_state_y, 120, 36, 27,OPT_CENTER, "R2D", BLACK, GREEN, MAX_ALPHA);
 		draw_text(inv_state_x, inv_state_y, 28, OPT_CENTER, "R2D", WHITE, MAX_ALPHA);
     }
     else
