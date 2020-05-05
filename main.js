@@ -2,7 +2,7 @@ const electron = require("electron");
 const url = require("url");
 const path = require("path");
 const { decryptCode } = require("./backend/code_import");
-const { export_code } = require("./backend/compile_code");
+const { export_code, saveFile } = require("./backend/compile_code");
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
@@ -16,6 +16,7 @@ app.on("ready", () => {
     webPreferences: {
       nodeIntegration: true,
     },
+    icon: __dirname + "/icon/icon.ico",
   });
 
   mainWindow.loadURL(
@@ -66,6 +67,7 @@ function createCodeWindow() {
 //Catch code:import
 ipcMain.on("code:import", (e, item) => {
   decrypted = decryptCode(item);
+  console.log(decrypted);
 
   mainWindow.webContents.send("code:import", decrypted);
 
@@ -111,6 +113,10 @@ ipcMain.on("code:export:open", () => {
   compiledWindow.send("code:export:show", compileData);
 });
 
+ipcMain.on("save:data", (e, data) => {
+  saveFile(electron, data);
+});
+
 //-----------------------------
 //          Menu
 //-----------------------------
@@ -119,13 +125,37 @@ const mainMenuTemplate = [
     label: "File",
     submenu: [
       {
-        label: "Save",
+        label: "Save As",
+        accelerator:
+          process.platform == "darwin" ? "Command+Shift+S" : "Ctrl+Shift+S",
+        click() {
+          // saveFile(electron);
+          mainWindow.webContents.send("save:request");
+        },
       },
       {
         label: "Quit",
         accelerator: process.platform == "darwin" ? "Command+Q" : "Ctrl+Q", //hotkey
         click() {
           app.quit();
+        },
+      },
+    ],
+  },
+  {
+    label: "Edit",
+    submenu: [
+      {
+        label: "Delete",
+        accelerator: "delete",
+        click() {
+          mainWindow.webContents.send("delete");
+        },
+      },
+      {
+        label: "Clear",
+        click() {
+          mainWindow.webContents.send("clear");
         },
       },
     ],

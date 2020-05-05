@@ -42,6 +42,10 @@ function elemDrag(e) {
   selectedElement = e.target;
 }
 
+function elemClick(e) {
+  selectedElement = e.target;
+}
+
 backgroundLayer.add(group);
 stage.add(backgroundLayer);
 
@@ -73,11 +77,18 @@ function draw_background() {
 }
 
 //-------------------------
-//      On code import
+//      On code import and ipcRenderer
 //-------------------------
 ipcRenderer.on("code:import", code_import);
 
 ipcRenderer.on("code:export:request", export_code);
+
+ipcRenderer.on("delete", deleteSelected);
+
+ipcRenderer.on("clear", clearCanvas);
+
+ipcRenderer.on("save:request", saveRequest);
+
 //-------------------------
 //      resize
 //-------------------------
@@ -123,3 +134,32 @@ function zoom(e) {
   stage.batchDraw();
 }
 stage.on("wheel", zoom);
+
+//-------------------------
+//      delete selected
+//-------------------------
+function deleteSelected() {
+  if (selectedElement == null) return;
+  const index = listOfElements.indexOf(selectedElement);
+  listOfElements.splice(index, 1);
+
+  selectedElement.destroy();
+  backgroundLayer.draw();
+  selectedElement = null;
+}
+
+function clearCanvas() {
+  while (listOfElements.length > 0) {
+    selectedElement = listOfElements[0];
+    deleteSelected();
+  }
+}
+
+function saveRequest() {
+  if (listOfElements.length === 0) return;
+
+  const data = compile_code();
+  if (data.length === 0) return;
+
+  ipcRenderer.send("save:data", data);
+}

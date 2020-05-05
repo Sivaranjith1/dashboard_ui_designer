@@ -1,4 +1,19 @@
 function export_code() {
+  listOfElements = listOfElements.sort((a, b) => {
+    if (a instanceof Konva.Text && !(b instanceof Konva.Text)) {
+      return 1;
+    } else if (b instanceof Konva.Text && !(a instanceof Konva.Text)) {
+      return -1;
+    }
+  });
+  const output = compile_code();
+
+  if (output.length === 0) return;
+
+  ipcRenderer.send("code:export:main", output);
+}
+
+function compile_code() {
   output = [];
   listOfElements.forEach((elem) => {
     switch (true) {
@@ -21,7 +36,7 @@ function export_code() {
 
   if (output.length == 0) return;
 
-  ipcRenderer.send("code:export:main", output);
+  return output;
 }
 
 function exportRect(element) {
@@ -34,26 +49,28 @@ function exportRect(element) {
 
 function exportRectangel(elem) {
   const { attrs } = elem;
-  return `draw_rectangle(${attrs.x}, ${attrs.y},${attrs.width}, ${
-    attrs.height
-  }, ${hexToColor(attrs.stroke)}, MAX_ALPHA, ${attrs.strokeWidth});`;
+  return `draw_rectangle(${parseInt(attrs.x)}, ${parseInt(attrs.y)},${parseInt(
+    attrs.width
+  )}, ${parseInt(attrs.height)}, ${hexToColor(
+    attrs.stroke
+  )}, MAX_ALPHA, ${parseInt(attrs.strokeWidth)});`;
 }
 
 function exportRectangelFill(elem) {
   const { attrs } = elem;
-  let x2 = attrs.x + attrs.width;
-  let y2 = attrs.y + attrs.height;
-  return `draw_rectangleWithFill(${attrs.x}, ${
+  let x2 = parseInt(attrs.x + attrs.width);
+  let y2 = parseInt(attrs.y + attrs.height);
+  return `draw_rectangleWithFill(${parseInt(attrs.x)}, ${parseInt(
     attrs.y
-  }, ${x2}, ${y2},  ${hexToColor(attrs.fill)}, MAX_ALPHA);`;
+  )}, ${x2}, ${y2},  ${hexToColor(attrs.fill)}, MAX_ALPHA);`;
 }
 
 function exportText(elem) {
   const { attrs } = elem;
 
-  return `draw_text(${attrs.x}, ${attrs.y}, ${
+  return `draw_text(${parseInt(attrs.x)}, ${parseInt(attrs.y)}, ${parseInt(
     attrs.fontSize * fontScaler
-  }, OPT_LEFTX, "${attrs.text}", ${hexToColor(attrs.fill)}, MAX_ALPHA);`;
+  )}, OPT_LEFTX, "${attrs.text}", ${hexToColor(attrs.fill)}, MAX_ALPHA);`;
 }
 
 function exportButton(elem) {
@@ -75,12 +92,12 @@ function exportButton(elem) {
 
   const { attrs } = rect;
   const textAtters = text.attrs;
-  const x = attrs.x + attrs.width / 2;
-  const y = attrs.y + attrs.height / 2;
+  const x = parseInt(attrs.x + attrs.width / 2);
+  const y = parseInt(attrs.y + attrs.height / 2);
 
-  return `draw_button_flat(${x}, ${y}, ${attrs.width}, ${attrs.height}, ${
-    textAtters.fontSize * fontScaler
-  }, "${textAtters.text}", ${hexToColor(textAtters.fill)},${hexToColor(
-    attrs.fill
-  )}, MAX_ALPHA);`;
+  return `draw_button_flat(${x}, ${y}, ${parseInt(attrs.width)}, ${parseInt(
+    attrs.height
+  )}, ${parseInt(textAtters.fontSize * fontScaler)}, "${
+    textAtters.text
+  }", ${hexToColor(textAtters.fill)},${hexToColor(attrs.fill)}, MAX_ALPHA);`;
 }

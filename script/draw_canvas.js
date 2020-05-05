@@ -40,16 +40,19 @@ function draw_rect({ x, y, length, height, lineWidth, color }) {
     strokeWidth: lineWidth,
     draggable: true,
   });
+
   group.add(rect);
+  rect.zIndex(1);
   listOfElements.push(rect);
   globalIndexCounter++;
 
   rect.on("dragstart", elemDrag);
+  rect.on("click", elemClick);
 
   return rect;
 }
 
-function draw_rectFill({ x1, y1, x2, y2, color, alpha }) {
+function draw_rectFill({ x1, y1, x2, y2, color }) {
   let rect = new Konva.Rect({
     x: x1,
     y: y1,
@@ -59,11 +62,14 @@ function draw_rectFill({ x1, y1, x2, y2, color, alpha }) {
     fill: convert_color(color),
     draggable: true,
   });
+
   group.add(rect);
+  rect.zIndex(1);
   listOfElements.push(rect);
   globalIndexCounter++;
 
   rect.on("dragstart", elemDrag);
+  rect.on("click", elemClick);
 
   return rect;
 }
@@ -89,10 +95,12 @@ function draw_text({ x, y, textSize, string, color, centerAlignment }) {
   }
 
   group.add(text);
+  text.zIndex(3);
   listOfElements.push(text);
   globalIndexCounter++;
 
   text.on("dragstart", elemDrag);
+  text.on("click", elemClick);
   return text;
 }
 
@@ -132,10 +140,12 @@ function draw_buttonFlat({
   button.add(text);
 
   group.add(button);
+  button.zIndex(2);
   listOfElements.push(button);
   globalIndexCounter++;
 
   button.on("dragstart", elemDrag);
+  button.on("click", elemClick);
 
   return button;
 }
@@ -176,10 +186,12 @@ function draw_button({
   button.add(text);
 
   group.add(button);
+  button.zIndex(2);
   listOfElements.push(button);
   globalIndexCounter++;
 
   button.on("dragstart", elemDrag);
+  button.on("click", elemClick);
 
   return button;
 }

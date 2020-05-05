@@ -17,6 +17,7 @@ function decryptCode(code) {
 
   //draw_rect
   rect = findRegex(code, "draw_rectangle");
+  console.log(rect);
   rect = decryptRect(rect);
 
   //draw_rectangleWithFill
@@ -102,7 +103,7 @@ function decryptRect(arr) {
   arr.forEach((elem) => {
     if (elem.length === 7) {
       try {
-        // console.log(elem)
+        console.log(elem);
         output.push({
           type: "rect",
           x: eval(elem[0]),
