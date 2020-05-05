@@ -92,8 +92,8 @@ function exportButton(elem) {
 
   const { attrs } = rect;
   const textAtters = text.attrs;
-  const x = parseInt(attrs.x + attrs.width / 2);
-  const y = parseInt(attrs.y + attrs.height / 2);
+  const x = parseInt(elem.attrs.x + attrs.width / 2);
+  const y = parseInt(elem.attrs.y + attrs.height / 2);
 
   return `draw_button_flat(${x}, ${y}, ${parseInt(attrs.width)}, ${parseInt(
     attrs.height

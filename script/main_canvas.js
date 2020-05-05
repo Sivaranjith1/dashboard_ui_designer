@@ -27,7 +27,6 @@ draw_background();
 //-------------------------
 function groupDrag(e) {
   if (e.target == group) {
-    console.log("group");
     if (!e.evt.shiftKey) {
       group.stopDrag();
     }
@@ -40,10 +39,12 @@ function elemDrag(e) {
     e.target.stopDrag();
   }
   selectedElement = e.target;
+  showMenu(e);
 }
 
 function elemClick(e) {
   selectedElement = e.target;
+  showMenu(e);
 }
 
 backgroundLayer.add(group);
@@ -146,6 +147,7 @@ function deleteSelected() {
   selectedElement.destroy();
   backgroundLayer.draw();
   selectedElement = null;
+  hideAll();
 }
 
 function clearCanvas() {

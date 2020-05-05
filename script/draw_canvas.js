@@ -47,6 +47,7 @@ function draw_rect({ x, y, length, height, lineWidth, color }) {
   globalIndexCounter++;
 
   rect.on("dragstart", elemDrag);
+  rect.on("dragend", elemDrag);
   rect.on("click", elemClick);
 
   return rect;
@@ -69,6 +70,7 @@ function draw_rectFill({ x1, y1, x2, y2, color }) {
   globalIndexCounter++;
 
   rect.on("dragstart", elemDrag);
+  rect.on("dragend", elemDrag);
   rect.on("click", elemClick);
 
   return rect;
@@ -100,6 +102,7 @@ function draw_text({ x, y, textSize, string, color, centerAlignment }) {
   globalIndexCounter++;
 
   text.on("dragstart", elemDrag);
+  text.on("dragend", elemDrag);
   text.on("click", elemClick);
   return text;
 }
@@ -117,17 +120,19 @@ function draw_buttonFlat({
   let button = new Konva.Group({
     draggable: true,
     id: globalIndexCounter,
-  });
-  let rect = new Konva.Rect({
     x: x - length / 2,
     y: y - height / 2,
+  });
+  let rect = new Konva.Rect({
+    x: 0,
+    y: 0,
     width: length,
     height: height,
     fill: convert_color(buttonColor),
   });
   let text = new Konva.Text({
-    x: x,
-    y: y,
+    x: length / 2,
+    y: height / 2,
     fontSize: textSize / fontScaler,
     text: string,
     fill: convert_color(textColor),
@@ -145,6 +150,7 @@ function draw_buttonFlat({
   globalIndexCounter++;
 
   button.on("dragstart", elemDrag);
+  button.on("dragend", elemDrag);
   button.on("click", elemClick);
 
   return button;
@@ -163,17 +169,19 @@ function draw_button({
   let button = new Konva.Group({
     draggable: true,
     id: globalIndexCounter,
-  });
-  let rect = new Konva.Rect({
     x: x - length / 2,
     y: y - height / 2,
+  });
+  let rect = new Konva.Rect({
+    x: 0,
+    y: 0,
     width: length,
     height: height,
     fill: convert_color(buttonColor),
   });
   let text = new Konva.Text({
-    x: x,
-    y: y,
+    x: length / 2,
+    y: height / 2,
     fontSize: textSize / fontScaler,
     text: string,
     fill: convert_color(textColor),
@@ -191,6 +199,7 @@ function draw_button({
   globalIndexCounter++;
 
   button.on("dragstart", elemDrag);
+  button.on("dragend", elemDrag);
   button.on("click", elemClick);
 
   return button;
