@@ -1,4 +1,9 @@
 function convert_color(color) {
+  const found = color.match(/[0-9]+rgb[0-9]+rgb[0-9]+/g);
+  if (found != null) {
+    return decryptCustomRgb(found);
+  }
+
   switch (color) {
     case "BLACK":
       return rgbToHex(0, 0, 0);
@@ -75,6 +80,15 @@ function convert_color(color) {
     default:
       return rgbToHex(0, 0, 0);
       break;
+  }
+}
+
+function decryptCustomRgb(array) {
+  try {
+    const col = array[0].split("rgb").map((el) => parseInt(el));
+    return rgbToHex(col[0], col[1], col[2]);
+  } catch {
+    return rgbToHex(0, 0, 0);
   }
 }
 

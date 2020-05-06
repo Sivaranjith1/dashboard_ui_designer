@@ -10,6 +10,7 @@ function decryptCode(code) {
     */
 
   code = compile_code(code);
+  code = replaceColor(code);
 
   //draw_line
   line = findRegex(code, "draw_line");
@@ -17,7 +18,6 @@ function decryptCode(code) {
 
   //draw_rect
   rect = findRegex(code, "draw_rectangle");
-  console.log(rect);
   rect = decryptRect(rect);
 
   //draw_rectangleWithFill
@@ -59,6 +59,22 @@ function decryptCode(code) {
     ...btn,
     ...flat,
   ];
+}
+
+function replaceColor(code) {
+  let output = code;
+  let found = [...code.matchAll(/COLOR\([0-9]+,[0-9]+,[0-9]+\)/g)];
+  found.forEach((elem) => {
+    const color = elem[0]
+      .replace(/COLOR\(/g, "")
+      .replace(/\)/g, "")
+      .replace(/ /g, "")
+      .split(",");
+
+    const rgb = color.join("rgb");
+    output = output.replace(elem[0], rgb);
+  });
+  return output;
 }
 
 function findRegex(code, regex) {

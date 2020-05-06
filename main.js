@@ -2,7 +2,7 @@ const electron = require("electron");
 const url = require("url");
 const path = require("path");
 const { decryptCode } = require("./backend/code_import");
-const { export_code, saveFile } = require("./backend/compile_code");
+const { export_code, saveFile, loadFile } = require("./backend/compile_code");
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
@@ -131,6 +131,13 @@ const mainMenuTemplate = [
         click() {
           // saveFile(electron);
           mainWindow.webContents.send("save:request");
+        },
+      },
+      {
+        label: "Open",
+        accelerator: process.platform == "darwin" ? "Command+O" : "Ctrl+O",
+        click() {
+          loadFile(electron, mainWindow);
         },
       },
       {
