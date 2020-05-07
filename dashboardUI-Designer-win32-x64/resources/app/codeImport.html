@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Code</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/codeStyle.css">
+</head>
+<body>
+    <main> 
+        <h1>Import code</h1>
+        <form>
+            <div class="form-group">
+                <label for="code">Paste code here:</label>
+                <textarea class="form-control" id="code" rows="10"></textarea>
+            </div>
+            <button type="submit" class="btn btn-light">Run</button>
+        </form>
+    </main>
+
+    <script>
+        const electron = require('electron')
+        const { ipcRenderer } = electron
+
+        const form = document.querySelector('form')
+
+        form.addEventListener('submit', submitForm)
+
+        function submitForm(e){
+            e.preventDefault()
+            const item = document.querySelector('#code').value
+
+            ipcRenderer.send('code:import', item)
+        }
+    </script>
+</body>
+</html>

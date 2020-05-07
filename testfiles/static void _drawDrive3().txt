@@ -15,16 +15,12 @@ static void _drawDrive3()
     //Draw dashboard   
     //V_Min
 	draw_text(90,28,28,OPT_CENTERX,"V MIN", TEXT_GREY, MAX_ALPHA);
-	if(min_voltage > 3.7) //all good
-	{
-		draw_rectangle(25,65,150 - 25 ,165 - 65,FINE_GREEN,MAX_ALPHA, RECT_WIDTH);
-		draw_number(108, 90, 31, OPT_RIGHTX, (uint32_t)(min_voltage*10), WHITE, MAX_ALPHA);
-		draw_text(84, 90, 31, OPT_CENTERX, ".", WHITE, MAX_ALPHA);
-	} else 
+	else 
 	{
 		draw_rectangleWithFill(25,65,150,165,RED,MAX_ALPHA);
-		draw_number(108, 90, 31, OPT_RIGHTX, (uint32_t)(min_voltage*10), BLACK, MAX_ALPHA);
-		draw_text(84, 90, 31, OPT_CENTERX, ".", BLACK, MAX_ALPHA);
+		
+    draw_text(90, 90, 95, OPT_LEFTX, "0", COLOR(0,0,0), MAX_ALPHA);
+		draw_text(76, 95, 95, OPT_LEFTX, ".", COLOR(0,0,0), MAX_ALPHA);
 	}
     
    
@@ -32,15 +28,12 @@ static void _drawDrive3()
     draw_text(360,28,28,0,"T MAX", TEXT_GREY, MAX_ALPHA);
 	if(max_temp < 49) //all good
 	{
-		draw_rectangle(330,65,455 - 330,165 - 65,temp_color,MAX_ALPHA, RECT_WIDTH);
-		draw_number(390, 90, 31, OPT_CENTERX, (int32_t)(max_temp*10), WHITE, MAX_ALPHA);
-		draw_text(405, 90, 31, OPT_CENTERX, ".", WHITE, MAX_ALPHA);	
-	} else 
-	{
-		draw_rectangleWithFill(330,65,455,165,temp_color,MAX_ALPHA);
-		draw_number(390, 90, 31, OPT_CENTERX, (int32_t)(max_temp*10), BLACK, MAX_ALPHA);
-		draw_text(405, 90, 31, OPT_CENTERX, ".", BLACK, MAX_ALPHA);	
-	}
+		draw_rectangle(330,65,455 - 330,165 - 65,FINE_GREEN,MAX_ALPHA, RECT_WIDTH);
+		
+draw_text(368, 90, 95, OPT_LEFTX, "0", COLOR(255,255,255), MAX_ALPHA);
+	
+    draw_text(395, 95, 95, OPT_LEFTX, ".", COLOR(255,255,255), MAX_ALPHA);
+	} 
 	
      
     //Inverter
@@ -48,39 +41,15 @@ static void _drawDrive3()
    
     uint16_t inv_state_x = 240;
     uint16_t inv_state_y = 225;
-    // Inv state
-    if(!aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_FL].aliveStatus ||
-        !aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_FR].aliveStatus ||
-        !aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_RL].aliveStatus ||
-        !aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_RR].aliveStatus)
-    {
-        draw_button_flat(inv_state_x, inv_state_y, 120, 36, 28, "DEAD", WHITE, RED, MAX_ALPHA);
-    }
-    else if(inverter_data[FL].status.state.state.error ||
-            inverter_data[FR].status.state.state.error ||
-            inverter_data[RL].status.state.state.error ||
-            inverter_data[RR].status.state.state.error)
-    {
-		draw_button_flat(inv_state_x, inv_state_y, 120, 36, 28, "ERROR", WHITE, RED, MAX_ALPHA);
-    }
-    else if(inverter_data[FL].status.state.state.ready_to_drive &&
-            inverter_data[FR].status.state.state.ready_to_drive &&
-            inverter_data[RL].status.state.state.ready_to_drive &&
-            inverter_data[RR].status.state.state.ready_to_drive)
-    {
-		draw_text(inv_state_x, inv_state_y, 28, OPT_CENTER, "R2D", WHITE, MAX_ALPHA);
-    }
-    else
-    {
-		draw_button_flat(inv_state_x, inv_state_y, 120, 36, 28, "DEAD", BLACK, YELLOW, MAX_ALPHA);
-    }
+		draw_button_flat(inv_state_x, inv_state_y, 120, 36, 28, "DEAD", WHITE, RED, MAX_ALPHA);
+  
    
     //AMS MODE
     draw_text(87,190,27,OPT_CENTER,"AMS", TEXT_GREY, MAX_ALPHA);
-	draw_text(87, 225, 28, OPT_CENTER, ams_states[amsData.state.state], ams_state_colors[amsData.state.state], MAX_ALPHA);
+	draw_text(87, 225, 28, OPT_CENTER, IDLE, WHITE, MAX_ALPHA);
 
     //COOLING MODE
     draw_text(392, 190, 27, OPT_CENTER, "Cooling", TEXT_GREY, MAX_ALPHA);
-    draw_text(392, 225, 28, OPT_CENTER, cooling_states[cccData.cooling_state.cooling_mode.value], WHITE, MAX_ALPHA);
+    draw_text(392, 225, 28, OPT_CENTER, OFF, WHITE, MAX_ALPHA);
     
 }

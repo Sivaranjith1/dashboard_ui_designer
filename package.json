@@ -11,5 +11,8 @@
   "dependencies": {
     "electron": "^8.2.1",
     "konva": "^4.2.2"
+  },
+  "devDependencies": {
+    "electron-wix-msi": "^2.2.0"
   }
 }

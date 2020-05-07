@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard UI drawer - Revolve</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="right">
+        <div class="top">
+          <div id="container"></div>
+        </div>
+        <div class="bottom"></div>
+      </div>
+      <div class="left">
+        <div class="top-left">
+          <div class="input-field">
+            <label for="x">x</label>
+            <input id="x" type="number" />
+          </div>
+          <div class="input-field">
+            <label for="y">y</label>
+            <input id="y" type="number" />
+          </div>
+          <div class="input-field">
+            <label for="width">Width</label>
+            <input id="width" type="number" />
+          </div>
+          <div class="input-field">
+            <label for="height">Height</label>
+            <input id="height" type="number" />
+          </div>
+          <div class="input-field">
+            <label for="color">Color</label>
+            <input id="color" type="color" />
+          </div>
+          <div class="input-field">
+            <label for="stroke">Stroke width</label>
+            <input id="stroke" type="number" />
+          </div>
+
+          <div class="input-field">
+            <label for="text">Text</label>
+            <input id="text" type="text" />
+          </div>
+          <div class="input-field">
+            <label for="size">Text size</label>
+            <input id="size" type="number" />
+          </div>
+          <div class="input-field">
+            <label for="z">z index</label>
+            <input id="z" type="number" />
+          </div>
+        </div>
+
+        <div class="bottom-left">
+          <div class="add-btns" id="rect">Rectangel</div>
+          <div class="add-btns" id="rectWithFill">Rectangel with Fill</div>
+          <div class="add-btns" id="text">Text</div>
+          <div class="add-btns" id="button">Button</div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script/color.js"></script>
+    <script src="script/sideMenu.js"></script>
+    <script src="script/addButtons.js"></script>
+    <script src="script/draw_canvas.js"></script>
+    <script src="script/export_code.js"></script>
+    <script src="script/main_canvas.js"></script>
+  </body>
+</html>
