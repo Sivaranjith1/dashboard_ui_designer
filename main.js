@@ -2,7 +2,13 @@ const electron = require("electron");
 const url = require("url");
 const path = require("path");
 const { decryptCode } = require("./backend/code_import");
-const { export_code, saveFile, loadFile } = require("./backend/compile_code");
+const {
+  export_code,
+  saveFile,
+  loadFile,
+  loadMultipleFile,
+  menuChange,
+} = require("./backend/compile_code");
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
@@ -117,6 +123,8 @@ ipcMain.on("save:data", (e, data) => {
   saveFile(electron, data);
 });
 
+ipcMain.on("menu:compiled", (e, data) => menuChange(mainWindow, data));
+
 //-----------------------------
 //          Menu
 //-----------------------------
@@ -138,6 +146,12 @@ const mainMenuTemplate = [
         accelerator: process.platform == "darwin" ? "Command+O" : "Ctrl+O",
         click() {
           loadFile(electron, mainWindow);
+        },
+      },
+      {
+        label: "Open Folder",
+        click() {
+          loadMultipleFile(electron, mainWindow);
         },
       },
       {
