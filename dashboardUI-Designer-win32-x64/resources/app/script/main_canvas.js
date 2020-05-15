@@ -6,6 +6,8 @@ let globalIndexCounter = 0;
 let selectedElement = null;
 
 let listOfElements = [];
+let menus = [];
+let selectedMenu = null;
 
 const { ipcRenderer } = electron;
 
@@ -22,6 +24,7 @@ let group = new Konva.Group({
 
 draw_background();
 
+loadMultipleMenus(null, [{ name: "current", code: [] }]);
 //-------------------------
 //      Drags
 //-------------------------
@@ -81,6 +84,10 @@ function draw_background() {
 //      On code import and ipcRenderer
 //-------------------------
 ipcRenderer.on("code:import", code_import);
+
+ipcRenderer.on("code:import:multiple", loadMultipleMenus);
+
+ipcRenderer.on("menu:decrypted", saveMenu);
 
 ipcRenderer.on("code:export:request", export_code);
 
