@@ -1,0 +1,31 @@
+static void _drawLinPotMeter()
+{
+	uint8_t MAX_ALPHA = aliveDevices[COMMON_SYSTEMS_1_0_ID_SBS_FRONT].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+	uint8_t MAX_ALPHA  = aliveDevices[COMMON_SYSTEMS_1_0_ID_SBS_REAR].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    uint8_t WIDTH = 480;
+    uint8_t HEIGHT = 272;
+	
+	// DAMPERS
+	draw_text(	 WIDTH / 4, 50, theme.menusLabelSize, OPT_RIGHTX, "Damper FL", PURPLE, MAX_ALPHA);
+	draw_float(WIDTH / 4, 70, theme.entriesLabelSize, sbsData.dampers_front.compression_left, BLACK, MAX_ALPHA);
+			
+	draw_text(	 WIDTH - 5, 50, theme.menusLabelSize, OPT_RIGHTX, "Damper FR", PURPLE, MAX_ALPHA);
+	draw_float(WIDTH - 5, 70, theme.entriesLabelSize, sbsData.dampers_front.compression_right, BLACK, MAX_ALPHA);
+			
+	draw_text(	 WIDTH / 4, HEIGHT - 60, theme.menusLabelSize, OPT_RIGHTX, "Damper RL", PURPLE, MAX_ALPHA);
+	draw_float(WIDTH / 4, HEIGHT - 40, theme.entriesLabelSize, sbsData.dampers_rear.compression_left, BLACK, MAX_ALPHA);
+			
+	draw_text(	 WIDTH - 5, HEIGHT - 60, theme.menusLabelSize, OPT_RIGHTX, "Damper RR", PURPLE, MAX_ALPHA);
+	draw_float(WIDTH - 5, HEIGHT - 40, theme.entriesLabelSize, sbsData.dampers_rear.compression_right, BLACK, MAX_ALPHA);
+			
+	// APPS'S
+	draw_text(	 274, 50, theme.menusLabelSize, OPT_RIGHTX, "APPS 1", BLUE, MAX_ALPHA);
+	draw_float(274, 70, theme.entriesLabelSize, sbsData.pedal_positions.apps_left, BLACK, MAX_ALPHA);
+
+	draw_text(	 274, 100, theme.menusLabelSize, OPT_RIGHTX, "APPS 2", BLUE, MAX_ALPHA);
+	draw_float(274, 120, theme.entriesLabelSize, sbsData.pedal_positions.apps_right, BLACK, MAX_ALPHA);
+			
+	// KERS
+	draw_text(	 274, HEIGHT - 60, theme.menusLabelSize, OPT_RIGHTX, "KERS", NICE_BLUE, MAX_ALPHA);
+	draw_float(274, HEIGHT - 40, theme.entriesLabelSize, sbsData.pedal_positions.kers, BLACK, MAX_ALPHA);
+}

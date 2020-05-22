@@ -1,0 +1,13 @@
+draw_button_flat(42, 50, 79, 40, 29, "I_FL", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(114, 50, 79, 40, 29, "I_FR", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(32, 96, 79, 40, 29, "I_RL", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(111, 96, 79, 40, 29, "I_RR", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(235, 52, 146, 40, 31, "SBS_F", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(233, 98, 158, 40, 31, "SBS_R", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(397, 50, 158, 40, 31, "DCU_F", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(395, 97, 158, 40, 31, "DCU_R", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(74, 144, 158, 40, 31, "VCU", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(233, 144, 158, 40, 31, "CCC", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(394, 144, 158, 40, 31, "TELE", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(230, 197, 158, 40, 31, "AMS", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);
+draw_button_flat(395, 195, 158, 40, 31, "DCDC", COLOR(0,0,0),COLOR(0,255,0), MAX_ALPHA);

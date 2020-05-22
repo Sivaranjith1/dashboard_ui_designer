@@ -25,7 +25,7 @@ function show(array = []) {
   });
 }
 
-function showMenu({ target }) {
+function showMenu(target) {
   hideAll();
   let { attrs } = target;
   if (target instanceof Konva.Group) {
@@ -36,7 +36,6 @@ function showMenu({ target }) {
       x: target.attrs.x,
       y: target.attrs.y,
     };
-    console.log(attrs, target);
   }
   let keys = Object.keys(attrs);
   let index = keys.indexOf("stroke");

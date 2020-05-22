@@ -77,7 +77,6 @@ function exportButton(elem) {
   let rect;
   let text;
   elem.children.forEach((child) => {
-    console.log("child", child);
     if (child instanceof Konva.Rect) {
       rect = child;
     } else if (child instanceof Konva.Text) {

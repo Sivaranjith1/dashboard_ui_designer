@@ -1,6 +1,5 @@
 function code_import(evt, item) {
   listOfElements = [];
-  console.log(item);
   item.forEach((elem) => {
     switch (elem.type) {
       case "line":

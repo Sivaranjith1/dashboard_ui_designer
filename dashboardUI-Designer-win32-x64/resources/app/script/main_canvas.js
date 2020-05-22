@@ -42,12 +42,22 @@ function elemDrag(e) {
     e.target.stopDrag();
   }
   selectedElement = e.target;
-  showMenu(e);
+
+  if (listOfElements.indexOf(selectedElement) == -1) {
+    selectedElement = selectedElement.parent;
+  }
+
+  showMenu(selectedElement);
 }
 
 function elemClick(e) {
   selectedElement = e.target;
-  showMenu(e);
+
+  if (listOfElements.indexOf(selectedElement) == -1) {
+    selectedElement = selectedElement.parent;
+  }
+
+  showMenu(selectedElement);
 }
 
 backgroundLayer.add(group);
