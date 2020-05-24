@@ -1,0 +1,30 @@
+
+// GEAR TEMPS
+draw_text( WIDTH / 4, 50, 29, OPT_RIGHTX, "Gear FL", PURPLE, MAX_ALPHA);
+draw_float(WIDTH / 4, 70, 29, sbsData.gear_temperature_front.left, BLACK, MAX_ALPHA);
+
+draw_text( WIDTH - 5, 50, 29, OPT_RIGHTX, "Gear FR", PURPLE, MAX_ALPHA);
+draw_float(WIDTH - 5, 70, 29, sbsData.gear_temperature_front.right, BLACK, MAX_ALPHA);
+
+draw_text( WIDTH / 4, HEIGHT - 100, 29, OPT_RIGHTX, "Gear RL", PURPLE, MAX_ALPHA);
+draw_float(WIDTH / 4, HEIGHT -  80, 29, sbsData.gear_temperature_rear.left, BLACK, MAX_ALPHA);
+                                                                                        
+draw_text( WIDTH - 5, HEIGHT - 100, 29, OPT_RIGHTX, "Gear RR", PURPLE, MAX_ALPHA);
+draw_float(WIDTH - 5, HEIGHT -  80, 29, sbsData.gear_temperature_rear.right, BLACK, MAX_ALPHA);
+
+// COOLING TEMPS
+draw_text( WIDTH / 4,  90, 29, OPT_RIGHTX, "Inlet HL", NICE_BLUE, MAX_ALPHA);
+draw_float(WIDTH / 4, 110, 29, sbsData.radiator_temperatures.left_inlet_hot, BLACK, MAX_ALPHA);
+
+draw_text( WIDTH - 5,  90, 29, OPT_RIGHTX, "Inlet HR", NICE_BLUE, MAX_ALPHA);
+draw_float(WIDTH - 5, 110, 29, sbsData.radiator_temperatures.right_inlet_hot, BLACK, MAX_ALPHA);
+
+draw_text( WIDTH / 4, HEIGHT - 60, 29, OPT_RIGHTX, "Inlet CL", NICE_BLUE, MAX_ALPHA);
+draw_float(WIDTH / 4, HEIGHT - 40, 29, sbsData.radiator_temperatures.left_outlet_cold, BLACK, MAX_ALPHA);
+
+draw_text( WIDTH - 5, HEIGHT - 60, 29, OPT_RIGHTX, "Inlet CR", NICE_BLUE, MAX_ALPHA);
+draw_float(WIDTH - 5, HEIGHT - 40, 29, sbsData.radiator_temperatures.right_outlet_cold, BLACK, MAX_ALPHA);
+
+//Additional temps
+draw_text( WIDTH*2 / 3, 150, 29, OPT_RIGHTX, "Brake temp", GLV_BLUE, MAX_ALPHA);
+draw_float(WIDTH*2 / 3, 170, 29, sbsData.brake_temp.temperature, BLACK, MAX_ALPHA);

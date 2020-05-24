@@ -1,0 +1,48 @@
+uint8_t MAX_ALPHA = aliveDevices[COMMON_SYSTEMS_1_0_ID_AMS].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+	// Voltages
+	draw_text(     WIDTH /  4, 40, 29, OPT_RIGHTX, "MaxVolt", BLUE, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 40, 29, amsData.metadata.max_voltage_value, BLACK, MAX_ALPHA);
+
+	draw_text(     WIDTH /  4, 60, 29, OPT_RIGHTX, "MinVolt", BLUE, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 60, 29, amsData.metadata.min_voltage_value, BLACK, MAX_ALPHA);
+	
+	draw_text(     WIDTH /  4, 80, 29, OPT_RIGHTX, "AvgVolt", BLUE, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 80, 29, amsData.metadata.average_voltage_value, BLACK, MAX_ALPHA);
+
+	draw_text(		WIDTH /  2, 40, 29, OPT_RIGHTX, "ID:", BLUE, MAX_ALPHA);
+	draw_number(7 * WIDTH / 13, 40, 29, OPT_LEFTX, amsData.metadata.max_voltage_nr, BLACK, MAX_ALPHA);
+
+	draw_text(      WIDTH /  2, 60, 29, OPT_RIGHTX, "ID:", BLUE, MAX_ALPHA);
+	draw_number(7 * WIDTH / 13, 60, 29, OPT_LEFTX, amsData.metadata.min_voltage_nr, BLACK, MAX_ALPHA);
+	
+	// Temperatures
+	draw_text(     WIDTH /  4, 100, 29, OPT_RIGHTX, "MaxTemp", PURPLE, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 100, 29, amsData.metadata.max_temp_value, BLACK, MAX_ALPHA);
+
+	draw_text(     WIDTH /  4, 120, 29, OPT_RIGHTX, "MinTemp", PURPLE, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 120, 29, amsData.metadata.min_temp_value, BLACK, MAX_ALPHA);
+	
+	draw_text(     WIDTH /  4, 140, 29, OPT_RIGHTX, "AvgTemp", PURPLE, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 140, 29, amsData.metadata.average_temp_value, BLACK, MAX_ALPHA);
+
+	draw_text(		WIDTH /  2, 100, 29, OPT_RIGHTX, "ID:", PURPLE, MAX_ALPHA);
+	draw_number(7 * WIDTH / 13, 100, 29, OPT_LEFTX, amsData.metadata.max_temp_nr, BLACK, MAX_ALPHA);
+
+	draw_text(		WIDTH /  2, 120, 29, OPT_RIGHTX, "ID:", PURPLE, MAX_ALPHA);
+	draw_number(7 * WIDTH / 13, 120, 29, OPT_LEFTX, amsData.metadata.min_temp_nr, BLACK, MAX_ALPHA);
+	
+	// HV, current and state of charge, sum of cells
+	draw_text(     WIDTH /  4, 160, 29, OPT_RIGHTX, "TSVolt", DARK_GREEN, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 160, 29, amsData.TS_data.voltage_ts, BLACK, MAX_ALPHA);
+	
+	draw_text(     WIDTH /  4, 180, 29, OPT_RIGHTX, "SumOfCel", DARK_GREEN, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 180, 29, amsData.TS_data.voltage_total_sum_of_cells, BLACK, MAX_ALPHA);
+
+	draw_text(     WIDTH /  4, 200, 29, OPT_RIGHTX, "StOfChrge", DARK_GREEN, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 200, 29, amsData.state_of_charge.soc_lookup_table, BLACK, MAX_ALPHA);
+
+	draw_text(     WIDTH /  4, 220, 29, OPT_RIGHTX, "DCDCtemp", DARK_GREEN, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 220, 29, amsData.dcdc.temperature, BLACK, MAX_ALPHA);
+
+	draw_text(     WIDTH /  4, 240, 29, OPT_RIGHTX, "IMD_res", DARK_GREEN, MAX_ALPHA);
+	draw_float(5 * WIDTH / 12, 240, 29, amsData.imd_resistance.resistance/1000, BLACK, MAX_ALPHA);

@@ -1,0 +1,86 @@
+const color_t bg_good = COLOR(129, 199, 132);
+    const color_t bg_bad  = COLOR(239, 83, 80);
+    const color_t txt_col = COLOR(0, 0, 0);
+    // Header text
+    draw_text( 50, 40, 30, OPT_CENTERX, "Temp", BLACK, MAX_ALPHA);
+    draw_text(150, 40, 30, OPT_CENTERX, "Volt", BLACK, MAX_ALPHA);
+    draw_text(340, 40, 30, OPT_CENTERX, "Error", BLACK, MAX_ALPHA);
+
+    // Temperatures
+    color_t COLOR(239, 83, 80) = bg_good; // Replace with check
+    uint8_t alpha = MAX_ALPHA;
+    draw_button( 10,  75, 80, 45, 27, OPT_FLAT, "SiCMOS", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(10 + 80 - 20, (75+45-15), 26, 0/* Replace with real value */, COLOR(0, 0, 0), MAX_ALPHA);
+
+    draw_button( 10, 125, 80, 45, 27, OPT_FLAT, "Motor", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(10 + 80 - 20, (125+45-15), 26, 0/* Replace with real value */, COLOR(0, 0, 0), MAX_ALPHA);
+
+    draw_button( 10, 175, 80, 45, 27, OPT_FLAT, "AMS", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(10 + 80 - 20, (175+45-15), 26, 0/* Replace with real value */, COLOR(0, 0, 0), MAX_ALPHA);
+
+    draw_button( 10, 225, 80, 45, 27, OPT_FLAT, "Cooling", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(10 + 80 - 20, (225+45-15), 26, 0/* Replace with real value */, COLOR(0, 0, 0), MAX_ALPHA);
+    
+    // Voltages
+    draw_button(110,  75, 80, 45, 27, OPT_FLAT, "TS", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(110 + 80 - 20, (75+45-15), 26, amsData.TS_data.voltage_ts, COLOR(0, 0, 0), MAX_ALPHA);
+
+    
+    draw_button(110, 125, 80, 45, 27, OPT_FLAT, "SumOfCell", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(110 + 80 - 20, (125+45-15), 26, amsData.TS_data.voltage_total_sum_of_cells, COLOR(0, 0, 0), MAX_ALPHA);
+    
+    COLOR(239, 83, 80) = amsData.metadata.max_voltage_value <= AMS_MAX_CELL_VOLTAGE && amsData.metadata.max_voltage_value >= AMS_MIN_CELL_VOLTAGE ? bg_good : COLOR(239, 83, 80); 
+    draw_button(110, 175, 80, 45, 27, OPT_FLAT, "MaxCell", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(110 + 80 - 20, (175+45-15), 26, amsData.metadata.max_voltage_value, COLOR(0, 0, 0), MAX_ALPHA);
+    
+    COLOR(239, 83, 80) = amsData.metadata.min_voltage_value <= AMS_MAX_CELL_VOLTAGE && amsData.metadata.min_voltage_value >= AMS_MIN_CELL_VOLTAGE ? bg_good : COLOR(239, 83, 80); 
+    draw_button(110, 225, 80, 45, 27, OPT_FLAT, "MinCell", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_float(110 + 80 - 20, (225+45-15), 26, amsData.metadata.min_voltage_value, COLOR(0, 0, 0), MAX_ALPHA);
+    
+    // Errors/State
+    // SBS
+    const uint32_t sbs_errors = 0xffffffff;
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_AMS].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = sbsData.error_front.errors | sbs_errors ? COLOR(239, 83, 80) : bg_good;
+    draw_button(390,  75, 80, 45, 27, OPT_FLAT, "SBS_F", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_AMS].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = sbsData.error_rear.errors | sbs_errors ? COLOR(239, 83, 80) : bg_good;
+    draw_button(390, 125, 80, 45, 27, OPT_FLAT, "SBS_R", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+
+    // Inverters
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_FL].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = inverter_data[FL].status.state.state.error ? COLOR(239, 83, 80) : bg_good;
+    int8_t active_state = inverter_get_active_state(FL);
+    draw_button(210,  75, 80, 45, 27, OPT_FLAT, "INV_FL", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_text(210 + 80/2, 75 + 45 - 15, 26, OPT_CENTERX, "Unknown", COLOR(0, 0, 0), MAX_ALPHA);
+    
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_FR].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = inverter_data[FR].status.state.state.error ? COLOR(239, 83, 80) : bg_good;
+    active_state = inverter_get_active_state(FR);
+    draw_button(300,  75, 80, 45, 27, OPT_FLAT, "INV_FR", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_text(300 + 80/2, 75 + 45 - 15, 26, OPT_CENTERX, "Unknown", COLOR(0, 0, 0), MAX_ALPHA);
+    
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_RL].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = inverter_data[RL].status.state.state.error ? COLOR(239, 83, 80) : bg_good;
+    active_state = inverter_get_active_state(RL);
+    draw_button(210, 125, 80, 45, 27, OPT_FLAT, "INV_RL", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_text(210 + 80/2, 125 + 45 - 15, 26, OPT_CENTERX, "Unknown", COLOR(0, 0, 0), MAX_ALPHA);
+    
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_INVERTER_RR].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = inverter_data[RR].status.state.state.error ? COLOR(239, 83, 80) : bg_good;
+    active_state = inverter_get_active_state(RR);
+    draw_button(300, 125, 80, 45, 27, OPT_FLAT, "INV_RR", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_text(300 + 80/2, 125 + 45 - 15, 26, OPT_CENTERX, "Unknown", COLOR(0, 0, 0), MAX_ALPHA);
+
+    // AMS
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_AMS].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = amsData.state.state == AMS_STATE_1_0_STATE_ERROR ? COLOR(239, 83, 80) : bg_good;
+    draw_button(210, 175, 80, 95, 27, OPT_FLAT, "AMS", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_text(210 + 80/2, 205 + 45 - 15, 26, OPT_CENTERX, ams_states[amsData.state.state], COLOR(0, 0, 0), MAX_ALPHA);
+    
+    // VCU
+    alpha = aliveDevices[COMMON_SYSTEMS_1_0_ID_VCU].aliveStatus ? MAX_ALPHA : MEDIUM_ALPHA;
+    COLOR(239, 83, 80) = vcuData.state.cpu0_state == VCU_STATE_1_0_ERROR ? COLOR(239, 83, 80) : bg_good;
+    draw_button(300, 175, 80, 95, 27, OPT_FLAT, "VCU", COLOR(0, 0, 0), COLOR(239, 83, 80), MAX_ALPHA);
+    draw_text(300 + 80/2, 205 + 45 - 15, 26, OPT_CENTERX, vcu_states[vcuData.state.cpu0_state], COLOR(0, 0, 0), MAX_ALPHA);

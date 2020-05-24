@@ -10,6 +10,8 @@ function decryptCode(code) {
     */
 
   code = compile_code(code);
+  code = code.replace(/ /g, "");
+
   code = replaceColor(code);
 
   //draw_line
@@ -26,7 +28,9 @@ function decryptCode(code) {
 
   //draw_text
   text = findRegex(code, "draw_text");
+  console.log("text", text);
   text = decryptText(text);
+  console.log("decrupt ", text);
 
   //draw_number
   numb = findRegex(code, "draw_number");
@@ -119,7 +123,6 @@ function decryptRect(arr) {
   arr.forEach((elem) => {
     if (elem.length === 7) {
       try {
-        console.log(elem);
         output.push({
           type: "rect",
           x: eval(elem[0]),
@@ -209,7 +212,7 @@ function decryptButton(arr) {
           length: eval(elem[2]),
           height: eval(elem[3]),
           textSize: eval(elem[4]),
-          buttonStatus: elem[5],
+          centerAlignment: elem[5],
           string: elem[6],
           textColor: elem[7],
           buttonColor: elem[8],
@@ -245,7 +248,12 @@ function decryptButtonFlat(arr) {
 }
 
 function compile_code(code) {
-  let output = code.split(/(;[\s]+)/g);
+  let output;
+
+  code = code.replace(/WIDTH/g, "480");
+  code = code.replace(/HEIGHT/g, "270");
+
+  output = code.split(/(;[\s]+)/g);
   let vars = [];
 
   output.forEach((elem) => {

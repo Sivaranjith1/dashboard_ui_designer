@@ -14,6 +14,7 @@ function code_import(evt, item) {
         draw_text(elem);
         break;
       case "float":
+        draw_float(elem);
         break;
       case "button":
         draw_button(elem);
@@ -73,6 +74,17 @@ function draw_rectFill({ x1, y1, x2, y2, color }) {
   rect.on("click", elemClick);
 
   return rect;
+}
+
+function draw_float({ x, y, textSize, number, color }) {
+  draw_text({
+    x,
+    y,
+    textSize,
+    color,
+    string: number,
+    centerAlignment: "OPT_CENTER",
+  });
 }
 
 function draw_text({ x, y, textSize, string, color, centerAlignment }) {
@@ -164,12 +176,21 @@ function draw_button({
   textSize,
   textColor,
   string,
+  centerAlignment,
 }) {
+  let xpos = x - length / 2;
+  let ypos = y - height / 2;
+  console.log(centerAlignment);
+  if (centerAlignment == "OPT_FLAT") {
+    xpos = x;
+    ypos = y;
+  }
+
   let button = new Konva.Group({
     draggable: true,
     id: globalIndexCounter,
-    x: x - length / 2,
-    y: y - height / 2,
+    x: xpos,
+    y: ypos,
   });
   let rect = new Konva.Rect({
     x: 0,

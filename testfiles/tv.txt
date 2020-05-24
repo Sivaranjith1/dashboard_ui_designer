@@ -1,0 +1,31 @@
+static void _drawTVSettings()
+{
+    _drawEntries(STATIC,  5,  65, 100);
+    _drawEntries(REGULAR, 5, 100, 100);
+    _drawEntries(LAUNCH,  5, 135, 100);
+    _drawEntries(SKID,    5, 170, 100);
+
+	draw_text(280,  70, 28, OPT_RIGHTX, "Current Mode:", BLACK, MAX_ALPHA);
+	draw_text(280, 100, 28, OPT_RIGHTX, "TV Limits:", BLACK, MEDIUM_ALPHA);
+	draw_text(280, 130, 26, OPT_RIGHTX, "Torque:", BLACK, MEDIUM_ALPHA);
+	draw_text(280, 170, 26, OPT_RIGHTX, "RPM:", BLACK, MEDIUM_ALPHA);
+    draw_text(280, 190, 26, OPT_RIGHTX, "Power:", BLACK, MEDIUM_ALPHA);
+
+    // Values
+    draw_text(285, 70, 28, OPT_LEFTX, vcu_modes[vcuData.state.mode], BLACK, MAX_ALPHA);
+
+    draw_number(340, 130, 26, OPT_RIGHTX, (int8_t)tv_data.general.min_torque_per_wheel, BLACK, MEDIUM_ALPHA);
+    draw_number(340, 150, 26, OPT_RIGHTX, (int8_t)tv_data.general.max_torque_per_wheel, BLACK, MEDIUM_ALPHA);
+
+    draw_number(340, 170, 26, OPT_RIGHTX, (int16_t)tv_data.general.max_rpm, BLACK, MEDIUM_ALPHA);
+
+    draw_number(340, 190, 26, OPT_RIGHTX, (int16_t)(tv_data.power_limit.negative_power_limit / 1000), BLACK, MEDIUM_ALPHA);
+    draw_number(340, 210, 26, OPT_RIGHTX, (int16_t)(tv_data.power_limit.positive_power_limit / 1000), BLACK, MEDIUM_ALPHA);
+
+    // Units
+    draw_text(345, 130, 26, OPT_LEFTX, "[Nm, min]", BLACK, MEDIUM_ALPHA);
+    draw_text(345, 150, 26, OPT_LEFTX, "[Nm, max]", BLACK, MEDIUM_ALPHA);
+	draw_text(345, 170, 26, OPT_LEFTX, "[rpm]", BLACK, MEDIUM_ALPHA);
+    draw_text(345, 190, 26, OPT_LEFTX, "[kW, min]", BLACK, MEDIUM_ALPHA);
+    draw_text(345, 210, 26, OPT_LEFTX, "[kW, max]", BLACK, MEDIUM_ALPHA);
+}

@@ -1,0 +1,38 @@
+static void _drawVCU()
+{
+    // Status
+    draw_text(120,  55, 26, OPT_RIGHTX, "Uptime:",      BLACK, MAX_ALPHA);
+    draw_text(120,  70, 26, OPT_RIGHTX, "CANFD0_LVL:",  BLACK, MAX_ALPHA);
+    draw_text(120,  85, 26, OPT_RIGHTX, "CANFD1_LVL:",  BLACK, MAX_ALPHA);
+    draw_text(120, 100, 26, OPT_RIGHTX, "CANAUX_LVL:",  BLACK, MAX_ALPHA);
+    draw_text(120, 115, 26, OPT_RIGHTX, "CANDF0_RX_ERR:",  BLACK, MAX_ALPHA);
+    draw_text(120, 130, 26, OPT_RIGHTX, "CANDF0_TX_ERR:",  BLACK, MAX_ALPHA);
+    draw_text(120, 145, 26, OPT_RIGHTX, "CANDF1_RX_ERR:",  BLACK, MAX_ALPHA);
+    draw_text(120, 160, 26, OPT_RIGHTX, "CANDF1_TX_ERR:",  BLACK, MAX_ALPHA);
+    draw_text(120, 175, 26, OPT_RIGHTX, "INS_MSG_HZ:",  BLACK, MAX_ALPHA);
+    draw_text(120, 190, 26, OPT_RIGHTX, "INS_CRC_CNT:", BLACK, MAX_ALPHA);
+    draw_text(120, 205, 26, OPT_RIGHTX, "CPU0_EV_BUF:", BLACK, MAX_ALPHA);
+    draw_text(120, 220, 26, OPT_RIGHTX, "CPU1_EV_BUF:", BLACK, MAX_ALPHA);
+    draw_text(120, 235, 26, OPT_RIGHTX, "CPU0_EV_HZ:",  BLACK, MAX_ALPHA);
+    draw_text(120, 250, 26, OPT_RIGHTX, "CPU1_EV_HZ:",  BLACK, MAX_ALPHA);
+    
+    // Values
+    draw_number(150,  55, 26, OPT_LEFTX, vcuData.status.uptime,             BLACK, MAX_ALPHA);
+    draw_number(150,  70, 26, OPT_LEFTX, vcuData.status.canfd0_rx_fifo_lvl, BLACK, MAX_ALPHA);
+    draw_number(150,  85, 26, OPT_LEFTX, vcuData.status.canfd1_rx_fifo_lvl, BLACK, MAX_ALPHA);
+    draw_number(150, 100, 26, OPT_LEFTX, vcuData.status.canaux_rx_fifo_lvl, BLACK, MAX_ALPHA);
+    draw_number(150, 115, 26, OPT_LEFTX, vcuData.status.canfd0_rx_error,    BLACK, MAX_ALPHA);
+    draw_number(150, 130, 26, OPT_LEFTX, vcuData.status.canfd0_tx_error,    BLACK, MAX_ALPHA);
+    draw_number(150, 145, 26, OPT_LEFTX, vcuData.status.canfd1_rx_error,    BLACK, MAX_ALPHA);
+    draw_number(150, 160, 26, OPT_LEFTX, vcuData.status.canfd1_tx_error,    BLACK, MAX_ALPHA);
+    draw_number(150, 175, 26, OPT_LEFTX, vcuData.status.ins_msg_hz,         BLACK, MAX_ALPHA);
+    draw_number(150, 190, 26, OPT_LEFTX, vcuData.status.ins_crc_error,      BLACK, MAX_ALPHA);
+    draw_number(150, 205, 26, OPT_LEFTX, vcuData.status.cpu0_ev_buf,        BLACK, MAX_ALPHA);
+    draw_number(150, 220, 26, OPT_LEFTX, vcuData.status.cpu1_ev_buf,        BLACK, MAX_ALPHA);
+    draw_number(150, 235, 26, OPT_LEFTX, vcuData.status.cpu0_ev_hz,         BLACK, MAX_ALPHA);
+    draw_number(150, 250, 26, OPT_LEFTX, vcuData.status.cpu1_ev_hz,         BLACK, MAX_ALPHA);
+    
+    // CPU load
+    draw_linegraph_simple(200, 55, WIDTH - 200-10, HEIGHT-55-10, 120, vcuData.status.cpu0_load, 0, 100);
+    draw_text(200 + (WIDTH - 200 - 10) / 2, 70, 28, OPT_CENTERX, "cpu0_load", BLACK, MEDIUM_ALPHA);
+}

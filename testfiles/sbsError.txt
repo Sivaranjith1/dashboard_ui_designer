@@ -1,0 +1,24 @@
+const color_t COLOR(129, 199, 132) = COLOR(129, 199, 132);
+    const color_t bg_bad  = COLOR(239, 83, 80);
+    const color_t COLOR(0, 0, 0) = COLOR(0, 0, 0);
+    draw_text(125, 40, 29, OPT_CENTERX, "Front", BLACK, MAX_ALPHA);
+    draw_text(355, 40, 29, OPT_CENTERX, "Rear", BLACK, MAX_ALPHA);
+
+    
+    draw_button( 35,  70, 180, 18, 26, OPT_FLAT, "APPS_L_ERROR",        COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button( 35,  90, 180, 18, 26, OPT_FLAT, "APPS_R_ERROR",        COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    //draw_button( 35, 110, 180, 18, 26, OPT_FLAT, "APPS_IMPLAUSABILITY", COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button( 35, 130, 180, 18, 26, OPT_FLAT, "BP_ERROR",            COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button( 35, 150, 180, 18, 26, OPT_FLAT, "KERS_ERROR",          COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button( 35, 170, 180, 18, 26, OPT_FLAT, "STEERING_ERROR",      COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button( 35, 190, 180, 18, 26, OPT_FLAT, "GEAR_ERROR",          COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button( 35, 210, 180, 18, 26, OPT_FLAT, "DAMPER_L_ERROR",      COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button( 35, 230, 180, 18, 26, OPT_FLAT, "DAMPER_R_ERROR",      COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+
+
+
+    draw_button(265,  70, 180, 18, 26, OPT_FLAT, "RADIATOR_ERROR",      COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button(265,  90, 180, 18, 26, OPT_FLAT, "GEAR_ERROR",          COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button(265, 110, 180, 18, 26, OPT_FLAT, "DAMPER_L_ERROR",      COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button(265, 130, 180, 18, 26, OPT_FLAT, "DAMPER_R_ERROR",      COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
+    draw_button(265, 150, 180, 18, 26, OPT_FLAT, "RIDEHEIGHT_ERROR",    COLOR(0, 0, 0), COLOR(129, 199, 132), MAX_ALPHA);
